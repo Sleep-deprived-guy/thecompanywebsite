@@ -31,7 +31,10 @@ def run_task3():
 
 if "result" not in st.session_state:
     st.session_state.result = None
-
+if "result2" not in st.session_state:
+    st.session_state.result2 = None
+if "result3" not in st.session_state:
+    st.session_state.result3 = None
 # Button that runs Python code when pressed
 st.button("Generate NPC", on_click=run_task)
 
