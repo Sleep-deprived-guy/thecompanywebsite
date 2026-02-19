@@ -6,6 +6,7 @@ import time
 import code1
 import code2
 import code3
+import code4
 
 st.title("THE COMPANY website V1.0")
 
@@ -27,6 +28,11 @@ def run_task3():
         res = code3.run_task3()
     st.session_state.result3 = res
 
+def run_task4():
+    st.session_state.result4 = None
+    with st.spinner("generating shop..."):
+        res = code4.run_task4()
+    st.session_state.result4 = res
 
 if "result" not in st.session_state:
     st.session_state.result = None
@@ -34,12 +40,26 @@ if "result2" not in st.session_state:
     st.session_state.result2 = None
 if "result3" not in st.session_state:
     st.session_state.result3 = None
+if "result4" not in st.session_state:
+    st.session_state.result4 = None
 # Button that runs Python code when pressed
+st.write("Random Generators:")
+
 st.button("Generate NPC", on_click=run_task)
 
 if st.session_state.result is not None:
     st.success("NPC completed")
     st.write(st.session_state.result)
+
+st.button("Generate Shop", on_click=run_task4)
+if st.session_state.result4 is not None:
+    st.success("Shop Generated")
+    st.write(st.session_state.result4)
+
+st.write("")
+st.write("")
+st.write("")
+st.write("Dice Rollers:")
 
 st.button("Roll D20", on_click=run_task2)
 if st.session_state.result2 is not None:
@@ -74,6 +94,7 @@ if st.session_state.dice_input:
 
 
 
+
 st.write("")
 st.write("")
 st.write("")
@@ -82,3 +103,4 @@ st.write("Changelogs:")
 st.write("V1.0 Changelog: Created website")
 st.write("V1.1 Changelog: Added Custom Dice Roller and moved changelogs to the bottom of the page")
 st.write("V1.2 Changelog: Added multi-dice rolling for the custom dice roller")
+st.write("V1.3 Changelog: Added shop generator")
