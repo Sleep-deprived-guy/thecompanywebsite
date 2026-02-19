@@ -52,17 +52,28 @@ if st.session_state.result3 is not None:
     st.write(st.session_state.result3)
 
 st.text_input("custom dice", key="dice_input")
+st.text_input("dice amount", key="dice_amount_input")
 if st.session_state.dice_input:
     st.button("Roll Custom Dice", on_click=st.write("press to roll again:"))
     try:
         sides = int(st.session_state.dice_input)
         if sides > 0:
-            result = code3.roll_custom_dice(sides)
-            st.write(f"Rolled a D{sides}: {result}")
+            if st.session_state.dice_amount_input:
+                amount = int(st.session_state.dice_amount_input)
+                if amount > 0:
+                    results = [code3.roll_custom_dice(sides) for _ in range(amount)]
+                    st.write(f"Rolled {amount} D{sides}:")
+                    for result in results:
+                        st.write(result)
+                else:
+                    st.error("Please enter a positive integer for the amount of dice.")
         else:
             st.error("Please enter a positive integer.")
     except ValueError:
         st.error("Please enter a valid integer.")
+
+
+
 st.write("")
 st.write("")
 st.write("")
@@ -70,3 +81,4 @@ st.write("")
 st.write("Changelogs:")
 st.write("V1.0 Changelog: Created website")
 st.write("V1.1 Changelog: Added Custom Dice Roller and moved changelogs to the bottom of the page")
+st.write("V1.2 Changelog: Added multi-dice rolling for the custom dice roller")
