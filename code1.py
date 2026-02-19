@@ -53,18 +53,10 @@ def run_task():
         "Lee",
         "Parker",
     ]
-    # titles
-    list4 = ["Dr.", "Sir", "General", "Captain", "", "", "", "", ""]
+    
     # generations
-    list5 = ["II", "III", "", "", "", ""]
+    list5 = ["II", "III", "", "", "", "","","","","","","","","","","",""]
 
-    part1 = random.choice(list1)
-    part2 = random.choice(list2)
-    part3 = random.choice(list3)
-    part4 = random.choice(list4)
-    part5 = random.choice(list5)
-
-    name = f"{part4} {part1} {part2} {part3} {part5}"
 
     # Jobs
     list6 = [
@@ -81,6 +73,19 @@ def run_task():
         "Thief",
     ]
     job = random.choice(list6)
+    # titles
+    if job == "Soldier" or job == "State Soldier":
+        list4 = ["Sir", "General", "Captain", "", "", "", "", ""]
+    else:
+        list4 = ["Dr.", "Sir", "Lord", "", "", "", "", "", ""]
+    
+    part1 = random.choice(list1)
+    part2 = random.choice(list2)
+    part3 = random.choice(list3)
+    part4 = random.choice(list4)
+    part5 = random.choice(list5)
+
+    name = f"{part4} {part1} {part2} {part3} {part5}"
     # Age
     part6 = list(range(18, 51))
     age = str(random.choice(part6))
