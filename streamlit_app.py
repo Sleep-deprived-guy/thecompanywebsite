@@ -7,6 +7,7 @@ import code1
 import code2
 import code3
 import code4
+import code5
 
 st.title("THE COMPANY website V1.0")
 
@@ -34,6 +35,12 @@ def run_task4():
         res = code4.run_task4()
     st.session_state.result4 = res
 
+def run_task5():
+    st.session_state.result5 = None
+    with st.spinner("generating encounter..."):
+        res = code5.run_task5()
+    st.session_state.result5 = res
+
 if "result" not in st.session_state:
     st.session_state.result = None
 if "result2" not in st.session_state:
@@ -42,6 +49,8 @@ if "result3" not in st.session_state:
     st.session_state.result3 = None
 if "result4" not in st.session_state:
     st.session_state.result4 = None
+if "result5" not in st.session_state:
+    st.session_state.result5 = None
 # Button that runs Python code when pressed
 st.write("Random Generators:")
 
@@ -55,6 +64,11 @@ st.button("Generate Shop", on_click=run_task4)
 if st.session_state.result4 is not None:
     st.success("Shop Generated")
     st.write(st.session_state.result4)
+
+st.button("Generate encounter", on_click=run_task5)
+if st.session_state.result5 is not None:
+    st.success("Encounter Generated")
+    st.write(st.session_state.result5)
 
 st.write("")
 st.write("")
