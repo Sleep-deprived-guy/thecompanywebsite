@@ -8,8 +8,9 @@ import code2
 import code3
 import code4
 import code5
+import random
 
-st.title("THE COMPANY website V1.0")
+st.title("THE COMPANY website V1.4")
 
 def run_task2():
     st.session_state.result2 = None
@@ -41,6 +42,7 @@ def run_task5():
         res = code5.run_task5()
     st.session_state.result5 = res
 
+
 if "result" not in st.session_state:
     st.session_state.result = None
 if "result2" not in st.session_state:
@@ -69,6 +71,7 @@ st.button("Generate encounter", on_click=run_task5)
 if st.session_state.result5 is not None:
     st.success("Encounter Generated")
     st.write(st.session_state.result5)
+
 
 st.write("")
 st.write("")
@@ -105,9 +108,17 @@ if st.session_state.dice_input:
             st.error("Please enter a positive integer.")
     except ValueError:
         st.error("Please enter a valid integer.")
-
-
-
+st.write("")
+st.write("")
+st.write("")
+st.write("Misc:")
+st.text_input("list to pick from (use commas to separate items)", key="list_input")
+st.button("Pick from list", on_click=st.write("press to pick again:"))
+if st.session_state.list_input:
+    items = st.session_state.list_input.split(",")
+    if len(items) > 0:
+        selected_item = random.choice(items)
+        st.write(f"Selected item: {selected_item}")
 
 st.write("")
 st.write("")
@@ -118,3 +129,4 @@ st.write("V1.0 Changelog: Created website")
 st.write("V1.1 Changelog: Added Custom Dice Roller and moved changelogs to the bottom of the page")
 st.write("V1.2 Changelog: Added multi-dice rolling for the custom dice roller")
 st.write("V1.3 Changelog: Added shop generator")
+st.write("V1.4 Changelog: Added random item picker that can pick from custom lists")
