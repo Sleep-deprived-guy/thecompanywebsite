@@ -121,32 +121,33 @@ if st.session_state.list_input:
         st.write(f"Selected item: {selected_item}")
 
 st.write("")
-st.text_input("timer (in minutes)", key="timer_input")
-st.text_input("timer amount", key="timer_amount_input")
-if st.session_state.timer_input:
-    st.button("Add Timer", on_click=st.write("press to add again:"))
-    try:
-        minutes = int(st.session_state.timer_input)
-        if minutes > 0:
-            if st.session_state.timer_amount_input:
-                amount = int(st.session_state.timer_amount_input)
-                if amount > 0:
-                    if "timers" not in st.session_state:
-                        st.session_state.timers = {}
-                    for i in range(amount):
-                        timer_id = max(st.session_state.timers.keys()) + 1 if st.session_state.timers else 0
-                        st.session_state.timers[timer_id] = {
-                            "duration": minutes,
-                            "start_time": time.time(),
-                            "paused": False,
-                            "pause_time": None
-                        }
-                else:
-                    st.error("Please enter a positive integer for the timer amount.")
-        else:
-            st.error("Please enter a positive integer for the timer duration.")
-    except ValueError:
-        st.error("Please enter valid integers.")
+st.text_input("timer (in minutes)", key="timer_input", placeholder="Enter minutes")
+st.text_input("timer amount", key="timer_amount_input", placeholder="Enter amount")
+
+def add_timers():
+    if st.session_state.timer_input and st.session_state.timer_amount_input:
+        try:
+            minutes = int(st.session_state.timer_input)
+            amount = int(st.session_state.timer_amount_input)
+            if minutes > 0 and amount > 0:
+                if "timers" not in st.session_state:
+                    st.session_state.timers = {}
+                for i in range(amount):
+                    timer_id = max(st.session_state.timers.keys()) + 1 if st.session_state.timers else 0
+                    st.session_state.timers[timer_id] = {
+                        "duration": minutes,
+                        "start_time": time.time(),
+                        "paused": False,
+                        "pause_time": None
+                    }
+                st.session_state.timer_input = ""
+                st.session_state.timer_amount_input = ""
+            else:
+                st.error("Please enter positive integers.")
+        except ValueError:
+            st.error("Please enter valid integers.")
+
+st.button("Add Timer", on_click=add_timers)
 
 if "timers" not in st.session_state:
     st.session_state.timers = {}
